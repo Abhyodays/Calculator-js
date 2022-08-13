@@ -39,7 +39,7 @@ class Calculator{
     this.preOperand = '';
   }
   appendNumber(curNumber){
-    if(curNumber==='.' && this.curOperand.includes('.')) return;
+    if(curNumber==='.' && this.curOperand.toString().includes('.')) return;
     this.curOperand = this.curOperand.toString()+curNumber.toString();
   }
   chooseOperation(operation){
@@ -75,8 +75,11 @@ class Calculator{
     // if(this.operation != null)
     //   this.preOperandTextElement.innerText = `${this.getDisplayNumber(this.preOperand)}${this.operation}`;
     this.curOperandTextElement.innerText = this.curOperand;
-    if(this.operation != null){
+    if(this.operation !== undefined){
       this.preOperandTextElement.innerText = `${this.preOperand}${this.operation}`;
+    }
+    else{
+      this.preOperandTextElement.innerText = this.preOperand;
     }
   }
 }
