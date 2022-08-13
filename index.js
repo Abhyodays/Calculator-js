@@ -11,7 +11,7 @@ class Calculator{
     this.operation = undefined;
   }
   delete(){
-
+  this.curOperand = calculator.curOperand.toString().slice(0,-1);
   }
   compute(){
     let result ;
@@ -51,13 +51,7 @@ class Calculator{
     this.preOperand = this.curOperand;
     this.curOperand ='';
   }
-  updateDisplay(){
-    this.curOperandTextElement.innerText = this.getDisplayNumber(this.curOperand);
-    if(this.operation !==undefined)
-      this.preOperandTextElement.innerText = `${getDisplayNumber(this.preOperand)}${this.operation}`;
-    else
-      this.preOperandTextElement.innerText = getDisplayNumber(this.preOperand);
-  }
+  
   getDisplayNumber(num){
     const strNum = num.toString();
     const intDigits = parseFloat(strNum.split('.')[0]);
@@ -71,10 +65,19 @@ class Calculator{
         maximumFractionDigits:0
       })
     }
-    if(decimalDigits != NULL){
+    if(decimalDigits != null){
       return `${intDisplay}.${decimalDigits}`;
     }
-    return intDisplay
+    return intDisplay;
+  }
+  updateDisplay(){
+    // this.curOperandTextElement.innerText = this.getDisplayNumber(this.curOperand);
+    // if(this.operation != null)
+    //   this.preOperandTextElement.innerText = `${this.getDisplayNumber(this.preOperand)}${this.operation}`;
+    this.curOperandTextElement.innerText = this.curOperand;
+    if(this.operation != null){
+      this.preOperandTextElement.innerText = `${this.preOperand}${this.operation}`;
+    }
   }
 }
 
@@ -105,7 +108,7 @@ equalBtn.addEventListener('click',()=>{
   calculator.updateDisplay();
 })
 delBtn.addEventListener('click',()=>{
-  calculator.curOperand = calculator.curOperand.toString().slice(0,-1);
+  calculator.delete();
   calculator.updateDisplay();
 })
 
