@@ -14,7 +14,7 @@ class Calculator{
 
   }
   compute(){
-    let result = 0;
+    let result ;
     const cur = parseFloat(this.curOperand);
     const pre = parseFloat(this.preOperand);
     if(isNaN(cur)||isNaN(pre)) return;
@@ -28,7 +28,7 @@ class Calculator{
       case '*':
         result = pre*cur;
         break;
-      case '/':
+      case '÷':
         result = pre/cur;
         break;
       default:
@@ -36,7 +36,7 @@ class Calculator{
     }
     this.curOperand = result;
     this.operation = undefined;
-    this.preOperand = ''
+    this.preOperand = '';
   }
   appendNumber(curNumber){
     if(curNumber==='.' && this.curOperand.includes('.')) return;
@@ -55,6 +55,8 @@ class Calculator{
     this.curOperandTextElement.innerText = this.curOperand;
     if(this.operation !==undefined)
       this.preOperandTextElement.innerText = `${this.preOperand}${this.operation}`;
+    else
+      this.preOperandTextElement.innerText = this.preOperand;
   }
   getDisplayNumber(num){
     const strNum = num.toString();
