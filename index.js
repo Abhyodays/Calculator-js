@@ -52,11 +52,11 @@ class Calculator{
     this.curOperand ='';
   }
   updateDisplay(){
-    this.curOperandTextElement.innerText = this.curOperand;
+    this.curOperandTextElement.innerText = this.getDisplayNumber(this.curOperand);
     if(this.operation !==undefined)
-      this.preOperandTextElement.innerText = `${this.preOperand}${this.operation}`;
+      this.preOperandTextElement.innerText = `${getDisplayNumber(this.preOperand)}${this.operation}`;
     else
-      this.preOperandTextElement.innerText = this.preOperand;
+      this.preOperandTextElement.innerText = getDisplayNumber(this.preOperand);
   }
   getDisplayNumber(num){
     const strNum = num.toString();
