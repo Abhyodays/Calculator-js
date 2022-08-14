@@ -18,7 +18,7 @@ class Calculator{
     const cur = parseFloat(this.curOperand);
     const pre = parseFloat(this.preOperand);
     if(isNaN(cur)||isNaN(pre)) return;
-    switch(this.operation){
+    switch(this.operation.toString()){
       case '+':
         result = pre+cur;
         break;
@@ -29,6 +29,9 @@ class Calculator{
         result = pre*cur;
         break;
       case '÷':
+        result = pre/cur;
+        break;
+      case '/':
         result = pre/cur;
         break;
       default:
@@ -52,24 +55,24 @@ class Calculator{
     this.curOperand ='';
   }
   
-  getDisplayNumber(num){
-    const strNum = num.toString();
-    const intDigits = parseFloat(strNum.split('.')[0]);
-    const decimalDigits = strNum.split('.')[1];
-    let intDisplay;
-    if(isNaN(intDisplay)){
-      intDisplay = '';
-    }
-    else{
-      intDisplay = intDigits.toLocaleString('en',{
-        maximumFractionDigits:0
-      })
-    }
-    if(decimalDigits != null){
-      return `${intDisplay}.${decimalDigits}`;
-    }
-    return intDisplay;
-  }
+  // getDisplayNumber(num){
+  //   const strNum = num.toString();
+  //   const intDigits = parseFloat(strNum.split('.')[0]);
+  //   const decimalDigits = strNum.split('.')[1];
+  //   let intDisplay;
+  //   if(isNaN(intDisplay)){
+  //     intDisplay = '';
+  //   }
+  //   else{
+  //     intDisplay = intDigits.toLocaleString('en',{
+  //       maximumFractionDigits:0
+  //     })
+  //   }
+  //   if(decimalDigits != null){
+  //     return `${intDisplay}.${decimalDigits}`;
+  //   }
+  //   return intDisplay;
+  // }
   updateDisplay(){
     // this.curOperandTextElement.innerText = this.getDisplayNumber(this.curOperand);
     // if(this.operation != null)
@@ -118,4 +121,25 @@ delBtn.addEventListener('click',()=>{
 allClearBtn.addEventListener('click',()=>{
     calculator.clear();
     calculator.updateDisplay();
+})
+
+// Keyboard Support
+window.addEventListener('keydown',(e)=>{
+  let ch = e.key;
+  if(ch=='+' || ch=='-'||ch=='*'||ch=='/'){
+    calculator.chooseOperation(ch);
+  }
+  else if(ch>='1' && ch<='9'||ch=='.'){
+    calculator.appendNumber(ch);
+  }
+  else if(ch=='Enter'){
+    calculator.compute();
+  }
+  else if(ch=='Delete'){
+    calculator.clear();
+  }
+  else if(ch=='Backspace'){
+    calculator.delete()
+  }
+  calculator.updateDisplay();
 })
